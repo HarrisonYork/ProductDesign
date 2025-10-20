@@ -52,8 +52,8 @@ RF24Audio rfAudio(radio, rad_num);     // Set up the audio using the radio, and 
                                 // in a multi-node radio group. See the privateBroadcast() function.
 
 // nRF24 pin - Arduino pin
-// 3/CE - 7
-// 4/CSN - 8
+// 3/CE - 7 yellow
+// 4/CSN - 8 green
 // 5/SCK - 13
 // 6/MOSI - 11
 // 7/MISO - 12
@@ -103,7 +103,7 @@ void setup() {
   // Show the display buffer on the screen. You MUST call display() after
   // drawing commands to make them visible on screen!
   display.display();
-  delay(2000);
+  delay(200);
 }
 
 void loop() {
@@ -117,49 +117,49 @@ void loop() {
   int c = digitalRead(freq_up);
   int d = digitalRead(freq_down);
   
-  int l = digitalRead(lights);
+  int l = digitalRead(light_button);
   
-  if (a == 1) {
-    if (vol < 7) {
-      vol++;
-      rfAudio.setVolume(vol);
-      Serial.print("vol up: ");
-      Serial.println((int) vol);
-    }
+  // if (a == 1) {
+  //   if (vol < 7) {
+  //     vol++;
+  //     rfAudio.setVolume(vol);
+  //     Serial.print("vol up: ");
+  //     Serial.println((int) vol);
+  //   }
     
-    delay(100);
-  } 
-  else if (b == 1) {
-    if (vol > 0) {
-      vol--;
-      rfAudio.setVolume(vol);
-      Serial.print("vol down: ");
-      Serial.println((int) vol);
-    }
+  //   delay(100);
+  // } 
+  // else if (b == 1) {
+  //   if (vol > 0) {
+  //     vol--;
+  //     rfAudio.setVolume(vol);
+  //     Serial.print("vol down: ");
+  //     Serial.println((int) vol);
+  //   }
     
-    delay(100);
-  } 
-  else if (c == 1) {
-    if (rad_num < 10) {
-      rad_num++;
-      Serial.print("rad up: ");   
-      Serial.println(rad_num); 
-    }
+  //   delay(100);
+  // } 
+  // else if (c == 1) {
+  //   if (rad_num < 10) {
+  //     rad_num++;
+  //     Serial.print("rad up: ");   
+  //     Serial.println(rad_num); 
+  //   }
     
-    delay(1000);
-  } 
-  else if (d == 1) {
-    if (rad_num > 0) {
-      rad_num--;
-      Serial.print("rad down: ");
-      Serial.println(rad_num);
-    }
+  //   delay(100);
+  // } 
+  // else if (d == 1) {
+  //   if (rad_num > 0) {
+  //     rad_num--;
+  //     Serial.print("rad down: ");
+  //     Serial.println(rad_num);
+  //   }
     
-    delay(1000);
-  }
-  else if (l == 1) {
-    lightSwitch();
-  }
+  //   delay(100);
+  // }
+  // else if (l == 1) {
+  //   lightSwitch();
+  // }
   
 }
 
@@ -173,31 +173,25 @@ void lightSwitch() {
 }
 
 void home_text(void) {
-  int volume = 5;
-  int radio_num = 4;
+  int battery = 50;
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextSize(1); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(10, 0);
   
   display.print(F("Battery Life: "));
-  display.print(F(battery));
+  display.print(battery);
   display.println(F("%"));
-
-  display.display();      // Show initial text
-  delay(2000);
-
-  display.setCursor(20, 0);
   
+  display.setTextSize(2);
+  display.setCursor(10, 20);
   display.print(F("Volume: "));
-  display.println(F(volume));
+  display.println((int) vol);
 
-  display.display();      // Show initial text
-  delay(2000);
-
+  display.setCursor(0, 40);
   display.print(F("Channel: "));
-  display.println(F(radio_num));
+  display.println(rad_num);
 
   display.display();      // Show initial text
   delay(2000);
