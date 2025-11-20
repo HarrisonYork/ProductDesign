@@ -1,4 +1,6 @@
 # ProductDesign
+See New Software Serial repo: https://github.com/HarrisonYork/NewSoftSerial_
+
 Product Design repository
 
 ## FRS Frequencies
