@@ -1,5 +1,5 @@
 #include <Adafruit_NeoPixel.h>
-#include <NewSoftSerialY.h>
+#include <NewSoftSerial.h>
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Wire.h>
@@ -43,8 +43,8 @@ void setup() {
 
   pinMode(LED_SIG, OUTPUT);
 
-  Serial.begin(9600);
-  Serial.println("Starting display...");
+  // Serial.begin(9600);
+  // Serial.println("Starting display...");
   // display startup
   // display uses I2C
   Wire.begin();
@@ -75,7 +75,7 @@ void setup() {
 }
 
 void loop() {
-  // display "home" screen
+  // display home screen
   if (display_initialized) {
     if (display_counter < 150) {
       home_text();
@@ -117,7 +117,7 @@ void loop() {
     if (vol < 7) {
       vol++;
     }
-    Serial.println("v up");
+    // Serial.println("v up");
     display_counter = 0;
     delay(250);
   } 
@@ -126,7 +126,7 @@ void loop() {
     if (vol > 0) {
       vol--;
     }
-    Serial.println("v down");
+    // Serial.println("v down");
     display_counter = 0;
     delay(250);
   } 
@@ -138,7 +138,7 @@ void loop() {
     else {
       chan = 0;
     }
-    Serial.println("chan up");
+    // Serial.println("chan up");
     display_counter = 0;
     delay(250);
   } 
@@ -150,7 +150,7 @@ void loop() {
     else {
       chan = 7;
     }
-    Serial.println("chan down");
+    // Serial.println("chan down");
     display_counter = 0;
     delay(250);
   }
@@ -160,7 +160,7 @@ void loop() {
     } else {
       light_state = 0;
     }
-    Serial.println("light");
+    // Serial.println("light");
     display_counter = 0;
     delay(250);
   }

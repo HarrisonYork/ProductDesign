@@ -1,6 +1,5 @@
 #include <Adafruit_NeoPixel.h>
-#include <NewSoftSerialY.h>
-// #define FASTLED_FORCE_SOFTWARE_SPI
+#include <NewSoftSerial.h>
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Wire.h>
@@ -111,7 +110,7 @@ void setup() {
 }
 
 void loop() {
-  // display "home" screen
+  // display home screen
   if (display_initialized) {
     if (display_counter < 150) {
       home_text();
@@ -141,7 +140,6 @@ void loop() {
   if (a == 1) {
     if (vol < 7) {
       vol++;
-      // Serial.println("vol up");
       send_vol_command();
     }
     display_counter = 0;
@@ -224,7 +222,6 @@ void cycleLEDS() {
   strip.show();
 }
 
-
 // Turn all LEDs white
 void whiteLEDS() {
   for (int i = 0; i < NUM_LEDS; i++) {
@@ -244,7 +241,7 @@ void offLEDS() {
 void home_text(void) {
   display.clearDisplay();
 
-  display.setTextSize(1); // Draw 2X-scale text
+  display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(10, 0);
   
