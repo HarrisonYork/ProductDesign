@@ -259,4 +259,3 @@ void home_text(void) {
 
   display.display();      // Show initial text
 }
-
